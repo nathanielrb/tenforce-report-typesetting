@@ -1,0 +1,191 @@
+\documentclass[oneside]{memoir}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage[tracking=true]{microtype}
+%\usepackage[]{microtype}
+
+\usepackage{xcolor, marginnote, xparse, graphicx, caption, verse}
+
+\usepackage[hidelinks]{hyperref}
+
+\usepackage[hang,flushmargin]{footmisc} 
+
+\usepackage{ucs}
+
+\usepackage[T1]{fontenc}
+% \usepackage[sfdefault]{noto}
+%\usepackage[]{noto}
+
+%\usepackage{fontspec}
+\usepackage{cmbright}
+\usepackage{cmbright}
+%\usepackage[default,osfigures,scale=0.95]{opensans}
+
+% \renewcommand*\familydefault{\sfdefault} 
+
+\frenchspacing
+
+% This rule will take exactly \baselinskip space, maintaining the grid. The
+% raise value is the height above the next baseline. It will extend down
+% thickness.
+% \trule[thickness][raise]
+\NewDocumentCommand\trule{O{0.4pt}O{0pt}}{
+  \vskip0pt\vtop to0pt{
+    \noindent\raisebox{#2}{\vbox{\leavevmode\hrule height#1}}}
+}
+
+%% Font Sizes
+
+\makeatletter %only needed in preamble
+\renewcommand\normalsize{\@setfontsize\normalsize{10pt}{14pt}}
+\renewcommand\Large{\@setfontsize\Large{13pt}{18}}
+\renewcommand\footnotesize{\@setfontsize\footnotesize{8pt}{11}}
+\makeatother
+
+
+\setlength\parindent{-0em}
+\setlength{\parskip}{8pt}
+
+% Bringhurst layout
+
+\settypeblocksize{600.32431pt}{400pt}{1.25}
+
+\makechapterstyle{Bringhurst}{%
+  \chapterstyle{default}
+  \setsecnumdepth{subsection}
+  \renewcommand{\chaptitlefont}{%\fontfamily{libertine}\selectfont
+    \bfseries
+    % \raggedleft
+    %\normalfont
+    % \itshape
+    \huge}
+  \renewcommand*{\printchaptername}{}
+  \renewcommand*{\chapternamenum}{}
+  %% \renewcommand*{\printchapternum}{%
+  %% \marginnote{\chapnumfont \color{myred}}[0\baselineskip]
+  %% }%
+  \renewcommand*{\afterchapternum}{}
+  \renewcommand*{\printchaptertitle}[1]{
+    \chaptitlefont##1}
+  %  \renewcommand*{\afterchaptertitle}{\vspace{38pt}\hrule\vspace{10.5pt}} % 10.5+18-1pt for trule width
+
+  %\headheight18pt
+  \headsep27pt
+
+  \beforechapskip0pt
+  \baselineskip18pt
+  \topskip0pt
+  \afterchapskip10.5pt
+
+  \setsecindent{0pt}
+  \setbeforesecskip{21pt}
+  \setaftersecskip{7pt}
+  \setsecheadstyle{
+    \fontfamily{\sfdefault}\selectfont
+    % \bfseries
+    \raggedright
+    \huge
+  }
+
+  \setaftersubsecskip{7pt}
+  \setbeforesubsecskip{7pt}
+  \setsubsecindent{0pt}
+  \setsubsecheadstyle{
+    \fontfamily{\sfdefault}\selectfont
+    \bfseries
+    \raggedright
+  }
+  
+
+
+
+  % \linespread{1.24}
+
+  \topmargin0pt
+  \oddsidemargin30pt
+  %\evensidemargin0pt
+  
+  % footnotes as sidenotes
+
+  \renewcommand{\footnote}{\sidefootnote}
+
+  % \setsidefeet{ hhsepi }{ hwidthi }{ hvsepi }{ hadji }{ hfonti }{ hheighti }
+
+  \setsidefeet{10.5pt}{95.5pt}%
+              {\onelineskip}{0pt}%
+              {\normalfont\footnotesize}{\textheight}%
+
+
+              \makeevenhead{headings}{}{}{  \includegraphics[width=1cm]{/home/nathaniel/projects/osha/logo.png}   } 
+              \makeoddhead{headings}{}{}{  \includegraphics[width=1cm]{/home/nathaniel/projects/osha/logo.png}   } 
+              \makeevenhead{plain}{}{}{  \includegraphics[width=1cm]{/home/nathaniel/projects/osha/logo.png}   } 
+              \makeoddhead{plain}{}{}{  \includegraphics[width=1cm]{/home/nathaniel/projects/osha/logo.png}   } 
+
+
+              \makeevenfoot{plain}{}{\thepage}{}
+              \makeoddfoot{plain}{}{\thepage}{}
+              \makeevenfoot{headings}{}{\thepage}{}
+              \makeoddfoot{headings}{}{\thepage}{}
+}
+
+\vleftmargin0em
+
+%% \addtopsmarks{headings}{}{
+%%   \createmark{chapter}{left}{nonumber}{}{}
+%% }
+%% \pagestyle{headings} % activate changes
+
+
+%% My Settings
+
+\definecolor{myred}{HTML}{ab0024}
+
+
+\widowpenalty=5000
+\clubpenalty=5000 
+
+\lefthyphenmin4
+\righthyphenmin4
+
+\captionsetup{labelformat=empty}
+
+
+
+\usepackage{enumitem}
+\setlist{nolistsep}
+% \renewcommand{\item}{\item[\cdot]}
+
+
+\begin{document}
+\chapterstyle{Bringhurst}
+
+\pagestyle{empty}
+
+{
+  \raggedleft
+  \includegraphics[width=5cm]{/home/nathaniel/projects/osha/full-logo.png}   
+
+  \vspace{200pt}
+         {\Large $title$}
+
+         %$if(author)$
+         { \normalsize $author$}
+         $endif$
+
+         $subtitle$
+
+         $date$
+
+         \raggedright  
+}
+
+\pagestyle{plain}
+
+$body$
+
+%$if(alignment)$
+\end{$alignment$}
+$endif$
+
+\end{document}
