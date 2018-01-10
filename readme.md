@@ -5,14 +5,16 @@ A quick and dirty environment for typesetting TenForce reports in [Pandoc Markdo
 
 ## Installation
 
-Requires Pandoc and TexLive. For Ubuntu:
+1. Requires Pandoc and TexLive. For Ubuntu:
 
 ```
 sudo apt-get install pandoc
 sudo apt-get install texlive
 ```
 
-Edit the first line of ./typeset to point to the installation directory, and add ./typeset to your path:
+2. Edit the first line of ./typeset to point to the installation directory.
+
+3. Add ./typeset to your path:
 
 ```
 export PATH=$PATH:/path/to/tenforce-report-typesetting/typeset 
