@@ -14,7 +14,7 @@ then
   exit 1
 fi
 
-$TMP=`mktemp -d`
+TMP=`mktemp -d`
 
 if [[ $FORMAT = "odt" ]]
 then
@@ -34,8 +34,11 @@ else
   LATEXTEMPLATE=`[ -f template.tex ] && echo "template.tex" || echo $BASEDIR/template.tex`
   echo "Typesetting: $NAME.md => $NAME.pdf + .tex"
   echo "Using template: $LATEXTEMPLATE"
-  pandoc --template $LATEXTEMPLATE -f markdown -t latex -o $TMP/$NAME.tex $NAME.md
-  pandoc --template $LATEXTEMPLATE -f markdown -t latex -o $TMP/$NAME.pdf $NAME.md
+
+  echo "`sed s#\<BASEDIR\>#$BASEDIR#g $BASEDIR/template.tex`" >> $TMP/template.tex
+
+  pandoc --template $TMP/template.tex -f markdown -t latex -o $TMP/$NAME.tex $NAME.md
+  pandoc --template $TMP/template.tex -f markdown -t latex -o $TMP/$NAME.pdf $NAME.md
 
   mv $TMP/$NAME.tex .
   mv $TMP/$NAME.pdf .
