@@ -10,6 +10,8 @@
 
 \usepackage[hang,flushmargin]{footmisc} 
 
+\usepackage{longtable}
+
 \usepackage{ucs}
 
 %% Fonts
@@ -37,6 +39,7 @@
 \makeatletter %only needed in preamble
 \renewcommand\normalsize{\@setfontsize\normalsize{10pt}{14pt}}
 \renewcommand\Large{\@setfontsize\Large{13pt}{18}}
+\renewcommand\huge{\@setfontsize\Large{15pt}{20}}
 \renewcommand\footnotesize{\@setfontsize\footnotesize{8pt}{11}}
 \makeatother
 
@@ -129,6 +132,36 @@
 %% \setlist{nolistsep}
 %% \renewcommand{\item}{\item[\cdot]}
 
+%% Gray Background for Block Quotes
+
+\usepackage{xcolor}
+\definecolor{block-gray}{gray}{0.85}
+
+\usepackage{environ}
+
+\NewEnviron{myblock}
+{\colorbox{block-gray}{%
+\parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+\small\addtolength{\leftskip}{10mm}
+\addtolength{\rightskip}{10mm}
+\BODY}}
+}
+\renewcommand{\quote}{\myblock}
+\renewcommand{\endquote}{\endmyblock}
+
+
+%% Keep Images in Place
+
+\usepackage{float}
+\makeatletter
+\renewenvironment{figure}[1][\fps@figure]{
+  \edef\@tempa{\noexpand\@float{figure}[H]} 
+  \@tempa\centering
+}{
+  \end@float
+}
+\makeatother
+
 
 
 
@@ -153,7 +186,9 @@
          \raggedright  
 }
 
-\newpage\tableofcontents*
+\renewcommand\contentsname{}
+
+{\normalsize\newpage\tableofcontents*}
 
 \newpage\pagestyle{plain}
 

@@ -21,14 +21,14 @@ then
   ODTTEMPLATE=`[ -f template.odt ] && echo "template.odt" || echo $BASEDIR/template.odt`
   echo "Typesetting: $NAME.md => $NAME.odt"
   echo "Using template: $ODTTEMPLATE"
-  pandoc --template $ODTTEMPLATE -f markdown -o $TMP/$NAME.odt $NAME.md
+  pandoc --template $ODTTEMPLATE -f markdown+grid_tables -o $TMP/$NAME.odt $NAME.md
   mv $TMP/$NAME.odt .
 elif [[ $FORMAT = "docx" ]]
 then
   WORDTEMPLATE=`[ -f template.docx ] && echo "template.docx" || echo $BASEDIR/template.docx`
   echo "Typesetting: $NAME.md => $NAME.docx"
   echo "Using template: $WORDTEMPLATE"
-  pandoc --template $WORDTEMPLATE -f markdown  -o $TMP/$NAME.docx $NAME.md
+  pandoc --template $WORDTEMPLATE -f markdown+grid_tables  -o $TMP/$NAME.docx $NAME.md
   mv $TMP/$NAME.docx .
 else
   LATEXTEMPLATE=`[ -f template.tex ] && echo "template.tex" || echo $BASEDIR/template.tex`
@@ -37,8 +37,8 @@ else
 
   echo "`sed s#\<BASEDIR\>#$BASEDIR#g $BASEDIR/template.tex`" >> $TMP/template.tex
 
-  pandoc --template $TMP/template.tex -f markdown -t latex -o $TMP/$NAME.tex $NAME.md
-  pandoc --template $TMP/template.tex -f markdown -t latex -o $TMP/$NAME.pdf $NAME.md
+  pandoc --template $TMP/template.tex -f markdown+grid_tables -t latex -o $TMP/$NAME.tex $NAME.md
+  pandoc --template $TMP/template.tex -f markdown+grid_tables -t latex -o $TMP/$NAME.pdf $NAME.md
 
   mv $TMP/$NAME.tex .
   mv $TMP/$NAME.pdf .
