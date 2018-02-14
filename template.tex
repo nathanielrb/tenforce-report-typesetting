@@ -49,7 +49,7 @@
 
 %% Bringhurst layout
 
-\settypeblocksize{600.32431pt}{400pt}{1.25}
+\settypeblocksize{600.32431pt}{440pt}{1.25}
 
 \makechapterstyle{Bringhurst}{%
   \chapterstyle{default}
@@ -74,14 +74,14 @@
   \beforechapskip0pt
   \baselineskip18pt
   \topskip0pt
-  \afterchapskip10.5pt
+  \afterchapskip7pt
   \topmargin0pt
-  \oddsidemargin30pt
+  \oddsidemargin20pt
   %\evensidemargin0pt
 
   \setsecindent{0pt}
-  \setbeforesecskip{21pt}
-  \setaftersecskip{7pt}
+  \setbeforesecskip{14pt}
+  \setaftersecskip{14pt}
   \setsecheadstyle{
     \fontfamily{\sfdefault}\selectfont
     % \bfseries
@@ -89,12 +89,12 @@
     \Large
   }
 
-  \setaftersubsecskip{7pt}
-  \setbeforesubsecskip{21pt}
+  \setaftersubsecskip{3pt}
+  \setbeforesubsecskip{14pt}
   \setsubsecindent{0pt}
   \setsubsecheadstyle{
     \fontfamily{\sfdefault}\selectfont
-    \bfseries
+    \itshape
     \raggedright
   }
   
@@ -117,9 +117,6 @@
 
 \vleftmargin0em
 
-%% Colors
-\definecolor{myred}{HTML}{ab0024}
-
 \widowpenalty=5000
 \clubpenalty=5000 
 
@@ -135,16 +132,19 @@
 %% Gray Background for Block Quotes
 
 \usepackage{xcolor}
+%% Colors
+\definecolor{myred}{HTML}{ab0024}
 \definecolor{block-gray}{gray}{0.85}
 
 \usepackage{environ}
 
 \NewEnviron{myblock}
 {\colorbox{block-gray}{%
+\linespread{1.4}
 \parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
 \small\addtolength{\leftskip}{10mm}
 \addtolength{\rightskip}{10mm}
-\BODY}}
+\vspace{1em}\BODY\vspace{1em}}}
 }
 \renewcommand{\quote}{\myblock}
 \renewcommand{\endquote}{\endmyblock}
